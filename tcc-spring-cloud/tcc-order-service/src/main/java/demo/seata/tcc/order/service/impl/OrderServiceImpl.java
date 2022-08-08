@@ -1,9 +1,9 @@
 package demo.seata.tcc.order.service.impl;
 
-import cn.dmego.seata.common.dto.OrderDTO;
-import cn.dmego.seata.common.util.ResultHolder;
+import demo.seata.common.dto.OrderDTO;
+import demo.seata.common.util.ResultHolder;
 import demo.seata.tcc.order.dao.OrderDao;
-import demo.seata.tcc.order.proxy.AccountService;
+import demo.seata.tcc.order.fegin.AccountService;
 import demo.seata.tcc.order.service.OrderService;
 import io.seata.rm.tcc.api.BusinessActionContext;
 import org.slf4j.Logger;

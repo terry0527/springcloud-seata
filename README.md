@@ -20,7 +20,7 @@ SpringCloud 下的 Seata 分布式事务， AT 模式、TCC 模式 和 SAGA 模�
 ## 环境说明
 ```yaml
 mysql: 8.0.12
-consul: 1.9.2
+nacos: 2.0.3
 seata: 1.3.0
 ```
 

@@ -1,6 +1,6 @@
 package demo.seata.tcc.account.service.impl;
 
-import cn.dmego.seata.common.util.ResultHolder;
+import demo.seata.common.util.ResultHolder;
 import demo.seata.tcc.account.dao.AccountDao;
 import demo.seata.tcc.account.service.AccountService;
 import io.seata.rm.tcc.api.BusinessActionContext;

@@ -1,6 +1,6 @@
 package demo.seata.tcc.order.dao;
 
-import cn.dmego.seata.common.dto.OrderDTO;
+import demo.seata.common.dto.OrderDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
