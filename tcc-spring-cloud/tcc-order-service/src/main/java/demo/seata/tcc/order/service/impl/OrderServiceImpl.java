@@ -40,6 +40,9 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("账户服务 Try 阶段失败.");
         }
 
+        //制造异常
+       // int i = 1/0;
+
         //创建订单 Try
         int flag = orderDao.orderTry(orderDTO);
         if(flag == 0){

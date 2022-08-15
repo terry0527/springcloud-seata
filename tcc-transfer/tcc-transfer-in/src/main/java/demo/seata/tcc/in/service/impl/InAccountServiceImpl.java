@@ -4,7 +4,7 @@ import demo.seata.tcc.in.dao.InAccountDao;
 import demo.seata.tcc.in.entity.Account;
 import demo.seata.tcc.in.service.IInAccountService;
 import io.seata.rm.tcc.api.BusinessActionContext;
-import io.seata.rm.tcc.api.BusinessActionContextUtil;
+//import io.seata.rm.tcc.api.BusinessActionContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,38 +27,38 @@ public class InAccountServiceImpl implements IInAccountService {
 
     @Override
     public boolean inTry(String inId, String amount){
-        long s = System.currentTimeMillis();
-        BusinessActionContext actionContext = BusinessActionContextUtil.getContext();
-        String txId = actionContext.getXid();
-        long branchId = actionContext.getBranchId();
-        log.debug("[inTry]: 当前 XID:{}, branchId:{}, 用户:{}, 金额:{}", txId, branchId, inId, amount);
-        // 执行收钱 try SQL
-        int amountTry = inAccountDao.inComingTry(inId, Double.parseDouble(amount));
-        if(amountTry == 0){
-            throw new RuntimeException("收钱方 Try 阶段失败.");
-        }
-        long e = System.currentTimeMillis();
-        log.info("inTry used time:{} ms", (e - s));
+//        long s = System.currentTimeMillis();
+//        BusinessActionContext actionContext = BusinessActionContextUtil.getContext();
+//        String txId = actionContext.getXid();
+//        long branchId = actionContext.getBranchId();
+//        log.debug("[inTry]: 当前 XID:{}, branchId:{}, 用户:{}, 金额:{}", txId, branchId, inId, amount);
+//        // 执行收钱 try SQL
+//        int amountTry = inAccountDao.inComingTry(inId, Double.parseDouble(amount));
+//        if(amountTry == 0){
+//            throw new RuntimeException("收钱方 Try 阶段失败.");
+//        }
+//        long e = System.currentTimeMillis();
+//        log.info("inTry used time:{} ms", (e - s));
         return true;
     }
 
     @Override
     public boolean inTry2(String inId, String amount){
-        long s = System.currentTimeMillis();
-        BusinessActionContext actionContext = BusinessActionContextUtil.getContext();
-        String txId = actionContext.getXid();
-        long branchId = actionContext.getBranchId();
-        log.debug("[inTry2]: 当前 XID:{}, branchId:{}, 用户:{}, 金额:{}", txId, branchId, inId, amount);
-        // 执行收钱 try SQL
-        int amountTry = inAccountDao.inComingTry(inId, Double.parseDouble(amount));
-        if(amountTry == 0){
-            throw new RuntimeException("收钱方 Try 阶段失败.");
-        }
-        // 一阶段传递自定义参数
-        BusinessActionContextUtil.addContext("inId", inId);
-        BusinessActionContextUtil.addContext("amount", amount);
-        long e = System.currentTimeMillis();
-        log.info("inTry2 used time:{} ms", (e - s));
+//        long s = System.currentTimeMillis();
+//        BusinessActionContext actionContext = BusinessActionContextUtil.getContext();
+//        String txId = actionContext.getXid();
+//        long branchId = actionContext.getBranchId();
+//        log.debug("[inTry2]: 当前 XID:{}, branchId:{}, 用户:{}, 金额:{}", txId, branchId, inId, amount);
+//        // 执行收钱 try SQL
+//        int amountTry = inAccountDao.inComingTry(inId, Double.parseDouble(amount));
+//        if(amountTry == 0){
+//            throw new RuntimeException("收钱方 Try 阶段失败.");
+//        }
+//        // 一阶段传递自定义参数
+//        BusinessActionContextUtil.addContext("inId", inId);
+//        BusinessActionContextUtil.addContext("amount", amount);
+//        long e = System.currentTimeMillis();
+//        log.info("inTry2 used time:{} ms", (e - s));
         return true;
     }
 

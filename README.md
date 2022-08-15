@@ -27,7 +27,7 @@ seata: 1.3.0
 ## 工程目录结构
 
 ```
-springcloud-seata-demo
+springcloud-seata
 ├── common-parent              // 父POM工程
 ├── common-service             // 公共服务
 ├── at-spring-cloud            // AT 模式工程示例
@@ -49,7 +49,7 @@ springcloud-seata-demo
 │  ├── sql                     // 转账示例 sql 脚本
 │  ├── tcc-transfer-in         // 收钱方服务 
 │  └── tcc-trnasfer-out        // 转账方服务
-└── zsql                       // 订单库存示例 sql
+└── sql                       // 订单库存示例 sql
 ```
 
 

@@ -1,6 +1,6 @@
 package demo.seata.saga.order.service.impl;
 
-import cn.dmego.seata.common.dto.OrderDTO;
+import demo.seata.common.dto.OrderDTO;
 import demo.seata.saga.order.dao.OrderDao;
 import demo.seata.saga.order.service.OrderService;
 import io.seata.core.context.RootContext;

@@ -1,4 +1,4 @@
-import cn.dmego.seata.common.util.IDUtils;
+import demo.seata.common.util.IDUtils;
 
 public class Test {
     public static void main(String[] args) {

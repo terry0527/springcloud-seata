@@ -5,9 +5,6 @@ spring:
   application:
     name: tcc-product-service
   cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
     nacos:
       config:
         server-addr: localhost:8848
@@ -19,29 +16,74 @@ spring:
         password: nacos
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/seata_storage?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/seata_product?serverTimezone=GMT&allowPublicKeyRetrieval=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
 
 
-# Seata 配置项，对应 SeataProperties 类
+# seata 配置
 seata:
-  enable-auto-data-source-proxy: false
-  application-id: ${spring.application.name} # Seata 应用编号，默认为 ${spring.application.name}
-  tx-service-group: ${spring.application.name}-group # Seata 事务组编号，用于 TC 集群名
-  # Seata 服务配置项，对应 ServiceProperties 类
+  # 服务名称
+  application-id: seata-client
+  # 默认已开启数据源自动代理，取消datasource自动代理  enable-auto-data-source-proxy 这种连字符的写法是无法生效的，详情看SeataAutoConfiguration源码
+  #  enable-auto-data-source-proxy: false
+  enableAutoDataSourceProxy: true
+  # 使用JDK代理
+  use-jdk-proxy: false
+  enabled: true
+  # 必须和config.txt里面配置的属性一致
+  tx-service-group: my_test_tx_group
   service:
-    # 虚拟组和分组的映射
+    # 事务群组（可以每个应用独立取名，也可以使用相同的名字），要与服务端nacos-config.txt中
+    # service.vgroup_mapping中存在, 并且要保证多个群组情况下后缀名要保持一致-tx_group
+    # 如果注册在nacos中没有执行nacos-config.txt脚本的也可直接在nacos中添加dayaId:service.vgroup-mapping.zseven_tx_group=default
     vgroup-mapping:
-      tcc-product-service-group: default
-    # 分组和 Seata 服务的映射
-    grouplist:
-      default: 127.0.0.1:8091
-  # Seata 注册中心配置项，对应 RegistryProperties 类
-#  registry:
-#    type: nacos # 注册中心类型，默认为 file
-#    nacos:
-#      cluster: default # 使用的 Seata 分组
-#      namespace: # Nacos 命名空间
-#      serverAddr: 127.0.0.1:8848 # Nacos 服务地址
+      my_test_tx_group: default
+  # 对应registry.conf -> config节点的配置：此处将 nacso 作为配置中心
+  config:
+    # 注册中心类型：file 、nacos 、eureka、redis、zk、consul、etcd3、sofa 默认为 file
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: 286bf450-9fb8-4e9a-87f1-23375a0571e5
+      username: nacos
+      password: nacos
+  # 对应registry.conf -> registry节点的配置：此处将 Nacos作为 Seata注册中心, 客户端需向Nacos获取服务地址
+  registry:
+    # 注册中心类型：file 、nacos 、eureka、redis、zk、consul、etcd3、sofa 默认为 file
+    type: nacos
+    nacos:
+      # seata-server注册到Nacos上的应用名称 需要与seata-server一一对应
+      # 这里作为seata的客户端，连接到nacos注册中心，拉取seata-server在nacos上的在线节点
+      application: seata-server
+      # seata-server的Nacos注册地址 需要与seata-server的nacos一一对应
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+      # Nacos注册分组名 特别注意，需要与seata-server一一对应
+      group: SEATA_GROUP
+      # Nacos注册命名空间 特别注意，需要与seata-server一一对应
+      namespace: 286bf450-9fb8-4e9a-87f1-23375a0571e5
+      # 是否集群
+      cluster: default
+
+
+# 日志
+logging:
+  level:
+    io:
+      seata: info
+
+ribbon:
+  ConnectTimeout: 100000
+  ReadTimeout: 1000000
+  OkToRetryOnAllOperations: false
+
+# ORM框架
+mybatis:
+  # 包对应的xml文件
+  mapper-locations: classpath*:mapper/*.xml
+  # 所有entities所在包
+  type-aliases-package: com.z7.springcloud.entity

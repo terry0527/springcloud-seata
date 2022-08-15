@@ -1,6 +1,6 @@
 package demo.seata.saga.business.service;
 
-import cn.dmego.seata.common.dto.BusinessDTO;
+import demo.seata.common.dto.BusinessDTO;
 
 /**
  * BusinessService

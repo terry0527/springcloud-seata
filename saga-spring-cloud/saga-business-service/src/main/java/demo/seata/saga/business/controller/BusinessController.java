@@ -1,6 +1,6 @@
 package demo.seata.saga.business.controller;
 
-import cn.dmego.seata.common.dto.BusinessDTO;
+import demo.seata.common.dto.BusinessDTO;
 import demo.seata.saga.business.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
